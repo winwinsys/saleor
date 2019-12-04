@@ -3481,7 +3481,7 @@ type ProductVariantUpdatePrivateMeta {
 
 type Query {
   webhook(id: ID!): Webhook
-  webhooks(filter: WebhookFilterInput, before: String, after: String, first: Int, last: Int): WebhookCountableConnection
+  webhooks(sortBy: WebhooksSortingInput, filter: WebhookFilterInput, before: String, after: String, first: Int, last: Int): WebhookCountableConnection
   webhookEvents: [WebhookEvent]
   webhookSamplePayload(eventType: WebhookEventTypeEnum!): JSONString
   translations(kind: TranslatableKinds!, before: String, after: String, first: Int, last: Int): TranslatableItemConnection
@@ -4583,6 +4583,17 @@ input WebhookUpdateInput {
   serviceAccount: ID
   isActive: Boolean
   secretKey: String
+}
+
+enum WebhooksSortField {
+  NAME
+  SERVICE_ACCOUNT
+  TARGET_URL
+}
+
+input WebhooksSortingInput {
+  direction: OrderDirection!
+  field: WebhooksSortField
 }
 
 type Weight {
